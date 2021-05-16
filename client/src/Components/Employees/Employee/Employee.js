@@ -7,9 +7,14 @@ const Employee = () => {
 
   return (
     <div>
-      <h1>Employee</h1>
       {
-        emp.map((employee, index) => <h5 key={index}>{employee.emp_name}</h5>)
+        emp.map((employee, index) => 
+          <div key={index}>
+            <h2>Employee Name : {employee.emp_name}</h2>
+            <h6>Employee Email : {employee.emp_email}</h6>
+            <h6>Employee Email : {employee.emp_phone_no}</h6>
+            <h6>Employee Email : {employee.emp_salary}</h6>
+          </div>)
       }
     </div>
   )
