@@ -8,12 +8,12 @@ const Employee = () => {
   return (
     <div>
       {
-        emp.map((employee, index) => 
+        emp.length && emp.map((employee, index) => 
           <div key={index}>
             <h2>Employee Name : {employee.emp_name}</h2>
             <h6>Employee Email : {employee.emp_email}</h6>
-            <h6>Employee Email : {employee.emp_phone_no}</h6>
-            <h6>Employee Email : {employee.emp_salary}</h6>
+            <h6>Employee Phone Number : {employee.emp_phone_no}</h6>
+            <h6>Employee Salary : {employee.emp_salary}</h6>
           </div>)
       }
     </div>
