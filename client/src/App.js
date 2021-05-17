@@ -12,7 +12,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getAllEmployees())
-  })
+  },[dispatch])
   
 	return (
 		<div>
@@ -28,11 +28,11 @@ const App = () => {
             alignItems="stretch"
             spacing={3}
           >
-            <Grid item xs={12} lg={6}>
-              <Employees />
-            </Grid>
-            <Grid item xs={12} lg={6}>
+            <Grid item xs={12} lg={4}>
               <Form />
+            </Grid>
+            <Grid item xs={12} lg={8}>
+              <Employees />
             </Grid>
           </Grid>
         </Container>
