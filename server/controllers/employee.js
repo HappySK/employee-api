@@ -13,7 +13,7 @@ const createEmployee = (req, res) => {
 		if (err) console.log(err);
 	});
 
-	res.send("Employee Details added successfully");
+	res.json(employee);
 };
 
 export { getEmployees, createEmployee };
