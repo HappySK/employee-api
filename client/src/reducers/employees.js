@@ -7,6 +7,9 @@ export const employeeReducer = (employees = [], action) => {
     case 'CREATE_EMPLOYEE' :
       return [ ...employees, action.payload ]
 
+    case 'UPDATE_EMPLOYEE' : 
+      return [ ...employees, action.payload ]
+
     default : 
       return employees
   }
