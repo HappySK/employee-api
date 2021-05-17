@@ -10,13 +10,14 @@ const Form = () => {
 
 	const dispatch = useDispatch();
 
-	const initialState = {
+	const initialEmployeeState = {
 		emp_name: "",
 		emp_email: "",
 		emp_phone_no: "",
 		emp_salary: "",
 	};
-	const [employeeData, setEmployeeData] = useState(initialState);
+
+	const [employeeData, setEmployeeData] = useState(initialEmployeeState);
 
 	const handleChange = (e) => {
 		setEmployeeData({ ...employeeData, [e.target.name]: e.target.value });
@@ -25,7 +26,7 @@ const Form = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		dispatch(createEmployee(employeeData));
-		console.log(employeeData);
+		setEmployeeData(initialEmployeeState)
 	};
 
 	return (
