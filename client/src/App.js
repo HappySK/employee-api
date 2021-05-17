@@ -25,7 +25,7 @@ const App = () => {
           <Grid
             container
             justify="space-between"
-            alignItems="center"
+            alignItems="stretch"
             spacing={3}
           >
             <Grid item xs={12} lg={6}>
