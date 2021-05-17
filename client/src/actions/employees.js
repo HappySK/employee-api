@@ -8,3 +8,12 @@ export const getAllEmployees = () => async (dispatch) => {
     console.log(error.message)
   } 
 }
+
+export const createEmployee = (employeeData) => async (dispatch) => {
+  try {
+    const { data } = await api.createEmployee(employeeData)
+    dispatch({ type: 'CREATE_EMPLOYEE', payload: data})
+  } catch (error) {
+    console.log(error.message)
+  } 
+}
