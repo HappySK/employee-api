@@ -4,6 +4,9 @@ export const employeeReducer = (employees = [], action) => {
     case 'GET_EMPLOYEES' : 
       return action.payload
 
+    case 'CREATE_EMPLOYEE' :
+      return [ ...employees, action.payload ]
+
     default : 
       return employees
   }
