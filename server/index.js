@@ -14,6 +14,7 @@ app.use(cors());
 app.use('/employee', employeeRouter)
 
 const { DB_URL, PORT } = process.env;
+mongoose.set('useFindAndModify', false)
 mongoose.connect(
 	DB_URL,
 	{ useNewUrlParser: true, useUnifiedTopology: true },
@@ -25,3 +26,4 @@ mongoose.connect(
 		} else console.log(err.message);
 	}
 );
+
