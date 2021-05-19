@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Paper, Button, TextField, Typography } from "@material-ui/core";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import makeStyles from "./styles";
-import { createEmployee } from "../../actions/employees";
+import { createEmployee, updateEmployee } from "../../actions/employees";
 
-const Form = () => {
+const Form = ({ currentId, setCurrentId }) => {
 	const classes = makeStyles();
 
 	const dispatch = useDispatch();
+	const employee = useSelector(state => currentId ? state.employeeReducer.find(emp => emp._id === currentId) : null)
 
 	const initialEmployeeState = {
 		emp_name: "",
@@ -19,22 +20,41 @@ const Form = () => {
 
 	const [employeeData, setEmployeeData] = useState(initialEmployeeState);
 
+	useEffect(() => {
+		if(currentId)
+		{
+			setEmployeeData(employee)
+		}
+	}, [currentId, employee])
+
 	const handleChange = (e) => {
 		setEmployeeData({ ...employeeData, [e.target.name]: e.target.value });
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		dispatch(createEmployee(employeeData));
-		setEmployeeData(initialEmployeeState)
+		if(currentId)
+		{
+			await dispatch(updateEmployee(employeeData))
+		}
+		else
+		{
+			dispatch(createEmployee(employeeData));
+		}
+		clear()
 	};
+
+	const clear = () => {
+		setCurrentId(null)
+		setEmployeeData(initialEmployeeState)
+	}
 
 	return (
 		<div>
 			<form onSubmit={handleSubmit} className={classes.form} method="post">
 				<Paper elevation={3} className={classes.paper}>
 					<Typography variant="h5" align="center">
-						Employee Data Submission
+						{currentId ? 'Employee Data Updation' : 'Employee Data Submission'}
 					</Typography>
 					<TextField
 						name="emp_name"
@@ -72,8 +92,8 @@ const Form = () => {
 						value={employeeData.emp_salary}
 						onChange={handleChange}
 					/>
-					<Button type="submit" variant="contained" color="primary" fullWidth>
-						Submit
+					<Button type="submit" variant="contained" color="primary" disableRipple fullWidth>
+						{currentId ? 'Update' : 'Submit'}
 					</Button>
 				</Paper>
 			</form>

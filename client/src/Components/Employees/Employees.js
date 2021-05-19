@@ -1,11 +1,11 @@
 import React from 'react'
 import Employee from './Employee/Employee'
 
-const Employees = () => {
+const Employees = ({ setCurrentId }) => {
   return (
     <div>
       <h1>Employees Database</h1>
-      <Employee/>
+      <Employee setCurrentId={setCurrentId}/>
     </div>
   )
 }
