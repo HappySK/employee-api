@@ -9,13 +9,21 @@ import {
 	TableCell,
 	Paper,
 } from "@material-ui/core";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+import { deleteEmployee } from "../../../actions/employees";
+
 
 const Employee = ({ setCurrentId }) => {
+	const dispatch = useDispatch();
 	const emp = useSelector((state) => state.employeeReducer);
 
 	const handleEmployeeDetails = (employee) => {
-		setCurrentId(employee._id)
+		setCurrentId(employee._id);
+	};
+
+	const deleteEmployeeDetails = (id) => {
+		dispatch(deleteEmployee(id))
 	};
 
 	return (
@@ -58,6 +66,13 @@ const Employee = ({ setCurrentId }) => {
 												}
 											>
 												Edit Employee
+											</Button>
+											<Button
+												variant="outlined"
+												color="primary"
+												onClick={() => deleteEmployeeDetails(_id)}
+											>
+												Delete Employee
 											</Button>
 										</TableCell>
 									</TableRow>
