@@ -18,14 +18,30 @@ const createEmployee = (req, res) => {
 };
 
 const updateEmployee = async (req, res) => {
-	const { id } = req.params
-	const emp = req.body
-	
-	const employee = await Employee.findByIdAndUpdate({_id : id}, { $set : emp}, (err, emp) => {
-		if(err) console.log(err)
+	const { id } = req.params;
+	const emp = req.body;
+
+	const employee = await Employee.findByIdAndUpdate(
+		{ _id: id },
+		{ $set: emp },
+		(err, emp) => {
+			if (err) console.log(err);
+		}
+	);
+
+	res.send(employee);
+};
+
+const deleteEmployee = async (req, res) => {
+	const { id } = req.params;
+	await Employee.findByIdAndRemove({ _id: id }, (err) => {
+		if(err) 
+		{
+			return res.status(400).json({ message : err.message })
+		}
 	})
 
-	res.send(employee)
-}
+	res.status(200).json({ message : 'Employee Deleted Successfully' })
+};
 
-export { getEmployees, createEmployee, updateEmployee };
+export { getEmployees, createEmployee, updateEmployee, deleteEmployee };
